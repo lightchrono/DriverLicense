@@ -34,14 +34,30 @@ class FirebaseClass {
     private FirebaseAuth auth=null;
     private FirebaseAuth.AuthStateListener authListener=null;
 
-    public Integer dbConnect(){
+    public Integer init(){
 
 
-        if(db!=null){
+        if((db!=null)||(auth!=null)||(authListener!=null)){
             return -2;
         }
         try{
             db=FirebaseDatabase.getInstance();
+            auth=FirebaseAuth.getInstance();
+            authListener=new FirebaseAuth.AuthStateListener() {
+                @Override
+                public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                    FirebaseUser user=firebaseAuth.getCurrentUser();
+                    if(user!=null)
+                    {
+                        Log.d("firebase", "onAuthStateChanged:signed_in:" + user.getUid());
+
+                    }else{
+                        Log.d("firebase", "onAuthStateChanged:signed_out");
+
+                    }
+                }
+            };
+
 
         }catch (Exception ex){
             return -1;
@@ -50,25 +66,6 @@ class FirebaseClass {
         return 0;
     }
 
-    public Integer authConnect(){
-        if(auth!=null){
-            return -2;
-        }
-        try{
-            auth=FirebaseAuth.getInstance();
-        }catch (Exception ex) {
-            return -1;
-        }
-        return 0;
-    }
-
-    public void test(){
-        DatabaseReference obj=db.getReference("users");
-        DatabaseReference username=obj.child("username");
-        username.setValue("Hello");
-
-
-    }
 
     public void createAccount(String email, String password){
         auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener((Executor) this, new OnCompleteListener<AuthResult>() {
