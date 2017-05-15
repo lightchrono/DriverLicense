@@ -25,7 +25,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void run() {
                 firebase=new FirebaseClass();
-                switch (firebase.dbConnect()){
+                switch (firebase.init()){
                     case -2:{
                         Log.d("FIREBASE","Already Connected");
                         break;
@@ -37,7 +37,6 @@ public class LoginActivity extends AppCompatActivity {
                     }
                     case 0:{
                         Log.d("FIREBASE","Connected ON");
-                        firebase.test();
 
                         break;
                     }
