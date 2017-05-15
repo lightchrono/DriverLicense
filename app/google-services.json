@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "287353462631-adc58enc1kdf4l75narbl89tbbo182ll.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.intern01.driverlicense",
+            "certificate_hash": "ef7695ce97fdbeb4fb1808363d5aefe797be270c"
+          }
+        },
+        {
           "client_id": "287353462631-9m32a7kanhdktn0n8k41tsir8vfgrudm.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
