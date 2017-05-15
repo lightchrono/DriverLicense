@@ -10,7 +10,7 @@ import android.widget.EditText;
 public class RegisterActivity extends AppCompatActivity {
 
     FirebaseClass firebase=null;
-    String bobi="h";
+    String bobi="he";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
