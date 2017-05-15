@@ -1,26 +1,20 @@
 package com.example.intern01.driverlicense;
 
-import android.app.Dialog;
-import android.content.Intent;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
-public class LoginActivity extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity {
 
-    FirebaseClass firebase;
+    FirebaseClass firebase=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-
+        setContentView(R.layout.activity_register);
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -46,28 +40,21 @@ public class LoginActivity extends AppCompatActivity {
         }).start();
 
 
+        Button registerB=(Button)findViewById(R.id.registerB);
+        final EditText email=(EditText)findViewById(R.id.emailET);
+        final EditText pass=(EditText)findViewById(R.id.passwordET);
 
-
-
-        TextView registerTV=(TextView) findViewById(R.id.registerTV);
-        Button loginB=(Button) findViewById(R.id.loginB);
-
-        final Intent registerI=new Intent(this, RegisterActivity.class);
-
-        registerTV.setOnClickListener(new View.OnClickListener() {
+        registerB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(registerI);
-            }
-        });
-
-
-        loginB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        firebase.createAccount(String.valueOf(email.getText()),String.valueOf(pass.getText()));
+                    }
+                }).start();
             }
         });
 
     }
-
 }
