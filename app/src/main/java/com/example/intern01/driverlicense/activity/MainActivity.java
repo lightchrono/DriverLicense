@@ -33,7 +33,8 @@ public class MainActivity extends AppCompatActivity {
     private ImageView imgNavHeaderBg, imgProfile;
     private TextView txtName;
     private Toolbar toolbar;
-    private FloatingActionButton fab;
+    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!DECLARARE BUTON
+    //private FloatingActionButton fab;
 
     // urls to load navigation header background image
     // and profile image
@@ -68,7 +69,8 @@ public class MainActivity extends AppCompatActivity {
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         navigationView = (NavigationView) findViewById(R.id.nav_view);
-        fab = (FloatingActionButton) findViewById(R.id.fab);
+        //!!!!!!!!!!!!!!!!!!!! ID BUTON
+        //fab = (FloatingActionButton) findViewById(R.id.fab);
 
         // Navigation view header
         navHeader = navigationView.getHeaderView(0);
@@ -79,13 +81,14 @@ public class MainActivity extends AppCompatActivity {
         // load toolbar titles from string resources
         activityTitles = getResources().getStringArray(R.array.nav_item_activity_titles);
 
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        //!!!!!!!!!!!!!!! adaugare actiune buton
+        //fab.setOnClickListener(new View.OnClickListener() {
+           // @Override
+           // public void onClick(View view) {
+               // Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                     //   .setAction("Action", null).show();
+            //}
+       // });
 
         // load nav menu header data
         loadNavHeader();
@@ -140,8 +143,8 @@ public class MainActivity extends AppCompatActivity {
         if (getSupportFragmentManager().findFragmentByTag(CURRENT_TAG) != null) {
             drawer.closeDrawers();
 
-            // show or hide the fab button
-            toggleFab();
+            // !!!!!!!!!!!!!!!!!!show or hide the fab button
+            //toggleFab();
             return;
         }
 
@@ -168,7 +171,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // show or hide the fab button
-        toggleFab();
+        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        //toggleFab();
 
         //Closing drawer on item click
         drawer.closeDrawers();
@@ -266,7 +270,7 @@ public class MainActivity extends AppCompatActivity {
         };
 
         //Setting the actionbarToggle to drawer layout
-        drawer.setDrawerListener(actionBarDrawerToggle);
+        //drawer.setDrawerListener(actionBarDrawerToggle);
 
         //calling sync state is necessary or else your hamburger icon wont show up
         actionBarDrawerToggle.syncState();
@@ -295,11 +299,11 @@ public class MainActivity extends AppCompatActivity {
         super.onBackPressed();
     }
 
-    // show or hide the fab
-    private void toggleFab() {
-        if (navItemIndex == 0)
-            fab.show();
-        else
-            fab.hide();
-    }
+    // !!!!!!!!!!!!!!!!!!!show or hide the fab
+    //private void toggleFab() {
+       // if (navItemIndex == 0)
+          //  fab.show();
+       //else
+           // fab.hide();
+   // }
 }
