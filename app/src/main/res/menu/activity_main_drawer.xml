@@ -5,17 +5,21 @@
         <item
 
             android:id="@+id/nav_profile"
-            android:title="@string/nav_profile" />
+            android:title="@string/nav_profile"
+            android:icon="@drawable/ic_account_circle_black_24dp"/>
         <item
             android:id="@+id/nav_cars"
-            android:title="@string/nav_cars" />
+            android:title="@string/nav_cars"
+            android:icon="@drawable/ic_directions_car_black_24dp"/>
         <item
             android:id="@+id/nav_about"
-            android:title="@string/nav_about" />
+            android:title="@string/nav_about"
+            android:icon="@drawable/ic_help_black_24dp"/>
 
         <item
             android:id="@+id/nav_logout"
-            android:title="@string/nav_logout" />
+            android:title="@string/nav_logout"
+            android:icon="@drawable/ic_cloud_off_black_24dp"/>
     </group>
 
 </menu>
