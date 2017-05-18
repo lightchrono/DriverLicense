@@ -25,18 +25,22 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class LoginActivity extends AppCompatActivity {
 
 
     Activity activity;
+    boolean isOn=false;
+    Button loginB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         activity=this;
+        loginB= (Button) findViewById(R.id.loginB);
         if(init()){
             Log.d("firebase","Connection established");
         }
@@ -55,10 +59,8 @@ public class LoginActivity extends AppCompatActivity {
         }
 
 
-
-
         TextView registerTV = (TextView) findViewById(R.id.registerTV);
-        Button loginB = (Button) findViewById(R.id.loginB);
+
 
 
         final Intent registerI = new Intent(this, RegisterActivity.class);
@@ -75,12 +77,9 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                login("l@l.com","123123");
-                    Intent mainAct=new Intent(getBaseContext(),MainActivity.class);
-                    startActivity(mainAct);
-                    finish();
 
-
+                login("t1@t.com","123123");
+                loginB.setEnabled(false);
             }
         });
 
@@ -93,21 +92,11 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseDatabase db=null;
 
     private boolean init(){
-        try{
+
             auth=FirebaseAuth.getInstance();
-        }
-        catch (Exception authEx){
-            return false;
-        }
-        try{
             db=FirebaseDatabase.getInstance();
-        }
-        catch (Exception dbEx){
-            return false;
-        }
-        if((auth==null)||(db==null)){
-            return false;
-        }
+
+
         return true;
     }
     private void login(String email,String password){
@@ -116,7 +105,13 @@ public class LoginActivity extends AppCompatActivity {
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        Log.d("firebase", "signInWithEmail:onComplete:" + task.isSuccessful());
+                        Log.d("firebase2", "signInWithEmail:onComplete:" + task.isSuccessful());
+                        if(task.isSuccessful()){
+
+                            Intent main=new Intent(getBaseContext(),MainActivity.class);
+                            startActivity(main);
+                            finish();
+                        }
 
                         // If sign in fails, display a message to the user. If sign in succeeds
                         // the auth state listener will be notified and logic to handle the
@@ -124,6 +119,7 @@ public class LoginActivity extends AppCompatActivity {
                         if (!task.isSuccessful()) {
                             Log.w("firebase", "signInWithEmail:failed", task.getException());
                             Toast.makeText(activity, "Auth failed", Toast.LENGTH_SHORT).show();
+                            loginB.setEnabled(true);
                         }
 
                         // ...

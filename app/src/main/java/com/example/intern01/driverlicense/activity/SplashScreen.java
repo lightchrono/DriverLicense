@@ -25,7 +25,7 @@ public class SplashScreen extends AppCompatActivity {
             @Override
             public void run() {
                 int i = 0;
-                while (i < 5) {
+                while (i < 2) {
                     try {
                         i++;
                         Thread.sleep(1000);
