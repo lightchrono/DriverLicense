@@ -13,7 +13,7 @@
         android:gravity="center_horizontal"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="7dp">
+        tools:layout_editor_absoluteY="8dp">
 
         <Space
             android:layout_width="match_parent"
@@ -103,6 +103,32 @@
             android:gravity="center_horizontal"
             android:text="REGISTER"
             android:textColor="@android:color/holo_blue_dark" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="40dp">
+
+            <Button
+                android:id="@+id/loginGoogle"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:background="@drawable/ic_google"/>
+
+            <Space
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/loginFacebook"
+                android:background="@drawable/ic_facebook"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_weight="1" />
+        </LinearLayout>
 
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
