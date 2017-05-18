@@ -1,7 +1,12 @@
 package com.example.intern01.driverlicense;
 
+import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -18,40 +23,36 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthException;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class LoginActivity extends AppCompatActivity {
 
-    FirebaseClass firebase;
 
-    FirebaseAuth auth = FirebaseAuth.getInstance();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                firebase = new FirebaseClass();
-                switch (firebase.init()) {
-                    case -2: {
-                        Log.d("FIREBASE", "Already Connected");
-                        break;
-                    }
-                    case -1: {
-                        Log.d("FIREBASE", "Error! not conncted");
-                        //popup Connection Error => Exit
-                        break;
-                    }
-                    case 0: {
-                        Log.d("FIREBASE", "Connected ON");
-
-                        break;
-                    }
+        if(init()){
+            Log.d("firebase","Connection established");
+        }
+        else{
+            db=null;
+            auth=null;
+            AlertDialog.Builder builder=new AlertDialog.Builder(this);
+            builder.setMessage("Could not connect to server").setTitle("Connection Error").setCancelable(false)
+            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    LoginActivity.super.finish();
                 }
-            }
-        }).start();
+            });
+            builder.show();
+        }
+
+
 
 
         TextView registerTV = (TextView) findViewById(R.id.registerTV);
@@ -73,22 +74,41 @@ public class LoginActivity extends AppCompatActivity {
         loginB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                login();
+
+                    Intent mainAct=new Intent(getBaseContext(),MainActivity.class);
+                    startActivity(mainAct);
+                    finish();
+
+
             }
         });
 
 
+
     }
 
-    void login(){
-        auth.signInWithEmailAndPassword("t@t.com","123123").addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                Log.d("firebase", "signInWithEmail:onComplete:" + task.isSuccessful());
-                Intent intent=new Intent(getBaseContext(), MainActivity.class);
-                startActivity(intent);
 
-            }
-        });
+    private FirebaseAuth auth=null;
+    private FirebaseDatabase db=null;
+
+    private boolean init(){
+        try{
+            auth=FirebaseAuth.getInstance();
+        }
+        catch (Exception authEx){
+            return false;
+        }
+        try{
+            db=FirebaseDatabase.getInstance();
+        }
+        catch (Exception dbEx){
+            return false;
+        }
+        if((auth==null)||(db==null)){
+            return false;
+        }
+        return true;
     }
+
+
 }

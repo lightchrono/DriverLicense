@@ -1,10 +1,14 @@
 package com.example.intern01.driverlicense;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.text.Editable;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.intern01.driverlicense.activity.MainActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -86,19 +90,26 @@ class FirebaseClass {
         });
     }
 
-    public void loginFirebase(String email,String password){
-        auth.signInWithEmailAndPassword(email,password).addOnCompleteListener((Executor) this, new OnCompleteListener<AuthResult>() {
+    public void loginFirebase(){
+
+
+    }
+
+    boolean login(Activity activity){
+        final boolean[] ifFound = {false};
+        auth.signInWithEmailAndPassword("t@t.com","123123").addOnCompleteListener(activity, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                Log.d("firebase","signIN "+task.isSuccessful());
-
-                if(!task.isSuccessful()){
-                    Log.w("firebase", "signInWithEmail:failed", task.getException());
-
-                }
+                Log.d("firebase", "signInWithEmail:onComplete:" + task.isSuccessful());
+                ifFound[0] =true;
             }
         });
 
+        Log.d("firebaseClass","ifFound= "+ifFound[0]);
+        if (ifFound[0]) {
+            return true;
+        }
+        return false;
     }
 
 }
