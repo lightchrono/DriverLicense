@@ -20,7 +20,7 @@
             android:layout_height="45dp" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/loginAPPName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
@@ -42,7 +42,7 @@
             android:layout_height="10dp" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/loginTVUsername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
@@ -53,7 +53,7 @@
             android:layout_height="10dp" />
 
         <EditText
-            android:id="@+id/editText2"
+            android:id="@+id/loginETUsername"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -64,7 +64,7 @@
             android:layout_height="25dp" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/loginTVPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
@@ -75,7 +75,7 @@
             android:layout_height="10dp" />
 
         <EditText
-            android:id="@+id/editText4"
+            android:id="@+id/loginETPassword"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:ems="10"
