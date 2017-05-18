@@ -69,13 +69,13 @@
             android:hint="Enter password"/>
 
         <TextView
-            android:id="@+id/RegisterTVEmail"
+            android:id="@+id/registerTVEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Email" />
 
         <EditText
-            android:id="@+id/RegisterETEmail"
+            android:id="@+id/registerETEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -101,8 +101,5 @@
                 android:text="Register" />
 
         </LinearLayout>
-
-
-
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
