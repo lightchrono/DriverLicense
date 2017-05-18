@@ -72,13 +72,16 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        final EditText username=(EditText) findViewById(R.id.loginETUsername);
+        final EditText password=(EditText ) findViewById(R.id.loginETPassword);
 
         loginB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //ToDo Test if string is empty
+                if((username.getText().toString()=="")||(password.getText()==null)) return;
 
-
-                login("t@t.com","123123");
+                login(username.getText().toString(),password.getText().toString());
                 loginB.setEnabled(false);
             }
         });
