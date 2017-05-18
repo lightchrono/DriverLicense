@@ -58,8 +58,8 @@ public class LoginActivity extends AppCompatActivity {
         TextView registerTV = (TextView) findViewById(R.id.registerTV);
         Button loginB = (Button) findViewById(R.id.loginB);
 
-        final EditText emailET = (EditText) findViewById(R.id.emailET);
-        final EditText passET = (EditText) findViewById(R.id.passwordET);
+        final EditText emailET = (EditText) findViewById(R.id.registerETEmail);
+        final EditText passET = (EditText) findViewById(R.id.registerETPassword);
 
         final Intent registerI = new Intent(this, RegisterActivity.class);
 
