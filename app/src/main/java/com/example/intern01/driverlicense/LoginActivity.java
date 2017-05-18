@@ -29,12 +29,13 @@ import com.google.firebase.database.FirebaseDatabase;
 public class LoginActivity extends AppCompatActivity {
 
 
-
+    Activity activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        activity=this;
         if(init()){
             Log.d("firebase","Connection established");
         }
@@ -58,8 +59,6 @@ public class LoginActivity extends AppCompatActivity {
         TextView registerTV = (TextView) findViewById(R.id.registerTV);
         Button loginB = (Button) findViewById(R.id.loginB);
 
-        final EditText emailET = (EditText) findViewById(R.id.registerETEmail);
-        final EditText passET = (EditText) findViewById(R.id.registerETPassword);
 
         final Intent registerI = new Intent(this, RegisterActivity.class);
 
@@ -109,6 +108,8 @@ public class LoginActivity extends AppCompatActivity {
         }
         return true;
     }
+
+
 
 
 }
