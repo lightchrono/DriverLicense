@@ -1,5 +1,7 @@
 package com.example.intern01.driverlicense.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
@@ -19,6 +21,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.example.intern01.driverlicense.LoginActivity;
 import com.example.intern01.driverlicense.R;
 import com.example.intern01.driverlicense.fragment.About;
 import com.example.intern01.driverlicense.fragment.MyCars;
@@ -57,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean shouldLoadHomeFragOnBackPress = true;
     private Handler mHandler;
 
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        context=this;
 
         mHandler = new Handler();
 
@@ -233,6 +238,8 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.nav_logout:
                         navItemIndex = 3;
+                        Intent i = new Intent(context, LoginActivity.class);
+                        context.startActivity(i);
                         //CURRENT_TAG = TAG_;
                         break;
                     default:
