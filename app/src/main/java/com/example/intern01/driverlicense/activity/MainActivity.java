@@ -1,5 +1,7 @@
 package com.example.intern01.driverlicense.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
@@ -19,6 +21,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.example.intern01.driverlicense.LoginActivity;
 import com.example.intern01.driverlicense.R;
 import com.example.intern01.driverlicense.fragment.About;
 import com.example.intern01.driverlicense.fragment.MyCars;
@@ -57,6 +60,9 @@ public class MainActivity extends AppCompatActivity {
     private boolean shouldLoadHomeFragOnBackPress = true;
     private Handler mHandler;
 
+    Context context;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +70,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+         context=this;
 
         mHandler = new Handler();
 
@@ -208,9 +216,10 @@ public class MainActivity extends AppCompatActivity {
         navigationView.getMenu().getItem(navItemIndex).setChecked(true);
     }
 
-    private void setUpNavigationView() {
+        private void setUpNavigationView() {
         //Setting Navigation View Item Selected Listener to handle the item click of the navigation menu
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+
 
             // This method will trigger on item Click of navigation menu
             @Override
@@ -232,7 +241,8 @@ public class MainActivity extends AppCompatActivity {
                         CURRENT_TAG = TAG_ABOUT;
                         break;
                     case R.id.nav_logout:
-                        navItemIndex = 3;
+
+                        navItemIndex=3;
                         //CURRENT_TAG = TAG_;
                         break;
                     default:
