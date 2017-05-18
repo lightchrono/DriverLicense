@@ -62,16 +62,13 @@ public class MainActivity extends AppCompatActivity {
 
     Context context;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-         context=this;
+        context=this;
 
         mHandler = new Handler();
 
@@ -216,10 +213,9 @@ public class MainActivity extends AppCompatActivity {
         navigationView.getMenu().getItem(navItemIndex).setChecked(true);
     }
 
-        private void setUpNavigationView() {
+    private void setUpNavigationView() {
         //Setting Navigation View Item Selected Listener to handle the item click of the navigation menu
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-
 
             // This method will trigger on item Click of navigation menu
             @Override
@@ -241,8 +237,9 @@ public class MainActivity extends AppCompatActivity {
                         CURRENT_TAG = TAG_ABOUT;
                         break;
                     case R.id.nav_logout:
-
-                        navItemIndex=3;
+                        navItemIndex = 3;
+                        Intent i = new Intent(context, LoginActivity.class);
+                        context.startActivity(i);
                         //CURRENT_TAG = TAG_;
                         break;
                     default:
