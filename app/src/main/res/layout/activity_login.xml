@@ -69,8 +69,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:text="PASSWORD"
-            android:hint="Enter password"/>
+            android:text="PASSWORD" />
 
         <Space
             android:layout_width="match_parent"
@@ -81,7 +80,8 @@
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:hint="Enter password"/>
 
         <Space
             android:layout_width="match_parent"
