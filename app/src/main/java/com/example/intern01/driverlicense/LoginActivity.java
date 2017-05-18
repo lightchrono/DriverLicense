@@ -17,6 +17,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.intern01.driverlicense.activity.MainActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -74,6 +75,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                login("l@l.com","123123");
                     Intent mainAct=new Intent(getBaseContext(),MainActivity.class);
                     startActivity(mainAct);
                     finish();
@@ -108,7 +110,26 @@ public class LoginActivity extends AppCompatActivity {
         }
         return true;
     }
+    private void login(String email,String password){
+        Log.d("firebase","firebase");
+        auth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        Log.d("firebase", "signInWithEmail:onComplete:" + task.isSuccessful());
 
+                        // If sign in fails, display a message to the user. If sign in succeeds
+                        // the auth state listener will be notified and logic to handle the
+                        // signed in user can be handled in the listener.
+                        if (!task.isSuccessful()) {
+                            Log.w("firebase", "signInWithEmail:failed", task.getException());
+                            Toast.makeText(activity, "Auth failed", Toast.LENGTH_SHORT).show();
+                        }
+
+                        // ...
+                    }
+                });
+    }
 
 
 
