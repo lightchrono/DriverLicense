@@ -78,7 +78,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
 
 
-                login("t1@t.com","123123");
+                login("t@t.com","123123");
                 loginB.setEnabled(false);
             }
         });
