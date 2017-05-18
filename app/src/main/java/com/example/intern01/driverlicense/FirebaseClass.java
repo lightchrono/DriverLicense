@@ -86,5 +86,19 @@ class FirebaseClass {
         });
     }
 
+    public void loginFirebase(String email,String password){
+        auth.signInWithEmailAndPassword(email,password).addOnCompleteListener((Executor) this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                Log.d("firebase","signIN "+task.isSuccessful());
+
+                if(!task.isSuccessful()){
+                    Log.w("firebase", "signInWithEmail:failed", task.getException());
+
+                }
+            }
+        });
+
+    }
 
 }
