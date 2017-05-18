@@ -240,6 +240,7 @@ public class MainActivity extends AppCompatActivity {
                         navItemIndex = 3;
                         Intent i = new Intent(context, LoginActivity.class);
                         context.startActivity(i);
+                        finish();
                         //CURRENT_TAG = TAG_;
                         break;
                     default:
