@@ -41,11 +41,8 @@ public class RegisterActivity extends AppCompatActivity {
 
         Button registerB = (Button) findViewById(R.id.confirmRegisterB);
         Button cancelB = (Button) findViewById(R.id.cancelRegisterB);
-        //final EditText username = (EditText) findViewById(R.id.registerETUsername);
         final EditText email = (EditText) findViewById(R.id.registerETEmail);
         final EditText password = (EditText) findViewById(R.id.registerETPassword);
-        //final EditText first = (EditText) findViewById(R.id.registerETFirst);
-        //final EditText last = (EditText) findViewById(R.id.registerETLast);
 
         registerB.setOnClickListener(new View.OnClickListener() {
             @Override
