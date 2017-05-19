@@ -1,10 +1,13 @@
 package com.example.intern01.driverlicense;
 
+import android.app.Activity;
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -18,11 +21,15 @@ import com.google.firebase.database.FirebaseDatabase;
 public class RegisterActivity extends AppCompatActivity {
 
     FirebaseClass firebase = null;
+    Activity activity;
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        context=this;
+        activity=this;
 
         init();
 
@@ -34,6 +41,25 @@ public class RegisterActivity extends AppCompatActivity {
         registerB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Test if string is empty
+                String em=email.getText().toString();
+                String pwd=password.getText().toString();
+                if ((em.matches("")) && (pwd.matches(""))) {
+                    InputMethodManager inputManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+                    inputManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                    Toast.makeText(activity, "Please enter credentials", Toast.LENGTH_SHORT).show();
+                    return;
+                } else if ((em.matches(""))) {
+                    InputMethodManager inputManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+                    inputManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                    Toast.makeText(activity, "Please enter a username", Toast.LENGTH_SHORT).show();
+                    return;
+                } else if ((pwd.matches(""))) {
+                    InputMethodManager inputManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+                    inputManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                    Toast.makeText(activity, "Please enter a password", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
