@@ -160,6 +160,7 @@ public class LoginActivity extends AppCompatActivity {
                                     .putString("lc_email", email)
                                     .putString("lc_pass", password)
                                     .apply();
+
                             Intent main = new Intent(getBaseContext(), MainActivity.class);
                             startActivity(main);
                             finish();
