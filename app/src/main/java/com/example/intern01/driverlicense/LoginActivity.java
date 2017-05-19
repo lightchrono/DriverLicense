@@ -28,15 +28,16 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GetTokenResult;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class LoginActivity extends AppCompatActivity {
 
 
-    boolean test=true;
+    boolean test = true;
 
     Activity activity;
-    boolean isOn=false;
+    boolean isOn = false;
     Button loginB;
     Context context;
 
@@ -86,15 +87,13 @@ public class LoginActivity extends AppCompatActivity {
                 String pwd = password.getText().toString();
                 InputMethodManager inputManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
                 inputManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-                if ((uname.matches("")) && (pwd.matches(""))){
+                if ((uname.matches("")) && (pwd.matches(""))) {
                     Toast.makeText(activity, "Please enter credentials", Toast.LENGTH_SHORT).show();
                     return;
-                }
-                else if ((uname.matches(""))){
+                } else if ((uname.matches(""))) {
                     Toast.makeText(activity, "Please enter a username", Toast.LENGTH_SHORT).show();
                     return;
-                }
-                else if((pwd.matches(""))){
+                } else if ((pwd.matches(""))) {
                     Toast.makeText(activity, "Please enter a password", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -105,13 +104,19 @@ public class LoginActivity extends AppCompatActivity {
         });
 
 
-        ImageView imgTest=(ImageView)findViewById(R.id.imageViewTest);
+        ImageView imgTest = (ImageView) findViewById(R.id.imageViewTest);
         imgTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 login("t@t.com", "123123");
                 Intent test = new Intent(getBaseContext(), TestActivity.class);
                 test.putExtra("USER", String.valueOf(auth.getCurrentUser().getUid()));
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                test.putExtra("token", token);
                 startActivity(test);
 
 
@@ -119,27 +124,33 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private FirebaseAuth auth=null;
-    private FirebaseDatabase db=null;
+    private FirebaseAuth auth = null;
+    private FirebaseDatabase db = null;
 
-    private boolean init(){
+    private boolean init() {
 
-            auth=FirebaseAuth.getInstance();
-            db=FirebaseDatabase.getInstance();
+        auth = FirebaseAuth.getInstance();
+        db = FirebaseDatabase.getInstance();
 
 
         return true;
     }
-    private void login(String email,String password){
-        Log.d("firebase","firebase");
+
+    private void login(final String email, final String password) {
+        Log.d("firebase", "firebase");
         auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         Log.d("firebase2", "signInWithEmail:onComplete:" + task.isSuccessful());
-                        if(task.isSuccessful()){
+                        if (task.isSuccessful()) {
 
-                            Intent main=new Intent(getBaseContext(),MainActivity.class);
+                            getSharedPreferences("loginC",MODE_PRIVATE)
+                                    .edit()
+                                    .putString("lc_email", email)
+                                    .putString("lc_pass", password)
+                                    .commit();
+                            Intent main = new Intent(getBaseContext(), MainActivity.class);
                             startActivity(main);
                             finish();
                         }
@@ -158,6 +169,8 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
+
+    String token;
 
 
 }

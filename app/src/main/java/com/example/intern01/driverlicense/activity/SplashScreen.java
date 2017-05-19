@@ -19,6 +19,14 @@ public class SplashScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
         context = this;
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+            }
+        })
+
         final ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBarSplash);
         progressBar.setMax(100);
         new Thread(new Runnable() {
