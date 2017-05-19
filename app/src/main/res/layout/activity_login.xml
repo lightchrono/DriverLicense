@@ -17,7 +17,7 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="45dp" />
+            android:layout_height="20dp" />
 
         <TextView
             android:id="@+id/loginAPPName"
@@ -29,13 +29,16 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="10dp" />
+            android:layout_height="5dp" />
 
         <ImageView
             android:id="@+id/imageViewTest"
+            android:adjustViewBounds="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:srcCompat="@mipmap/ic_launcher" />
+            android:maxHeight="100dp"
+            android:maxWidth="200dp"
+            app:srcCompat="@mipmap/ic_loadscreen" />
 
         <Space
             android:layout_width="match_parent"
@@ -112,7 +115,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingTop="40dp">
+            android:paddingTop="30dp">
 
             <Button
                 android:id="@+id/loginGoogle"
