@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.intern01.driverlicense.activity.MainActivity;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -65,7 +66,13 @@ public class LoginActivity extends AppCompatActivity {
 
 
         TextView registerTV = (TextView) findViewById(R.id.registerTV);
-
+        Button googleLoginB=(Button) findViewById(R.id.loginGoogle);
+        googleLoginB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loginGoogle();
+            }
+        });
 
         final Intent registerI = new Intent(this, RegisterActivity.class);
 
@@ -120,7 +127,6 @@ public class LoginActivity extends AppCompatActivity {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                test.putExtra("token", token);
                 startActivity(test);
 
 
@@ -173,8 +179,12 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
-
-    String token;
+    private void loginGoogle(){
+        GoogleSignInOptions gso=new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+    }
 
 
 }
