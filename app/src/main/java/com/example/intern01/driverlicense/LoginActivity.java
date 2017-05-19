@@ -45,6 +45,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        context = this;
         activity = this;
         loginB = (Button) findViewById(R.id.loginB);
         if (init()) {
@@ -145,7 +146,7 @@ public class LoginActivity extends AppCompatActivity {
                         Log.d("firebase2", "signInWithEmail:onComplete:" + task.isSuccessful());
                         if (task.isSuccessful()) {
 
-                            getSharedPreferences("loginC",MODE_PRIVATE)
+                            getSharedPreferences("loginC", MODE_PRIVATE)
                                     .edit()
                                     .putString("lc_email", email)
                                     .putString("lc_pass", password)
