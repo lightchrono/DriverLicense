@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -37,6 +38,7 @@ public class LoginActivity extends AppCompatActivity {
     Activity activity;
     boolean isOn=false;
     Button loginB;
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,9 +100,6 @@ public class LoginActivity extends AppCompatActivity {
                 test.putExtra("USER", String.valueOf(auth.getCurrentUser().getUid()));
                 startActivity(test);
 
-
-            }
-        });
 
     }
 
