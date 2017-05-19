@@ -8,12 +8,14 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -32,35 +34,35 @@ public class LoginActivity extends AppCompatActivity {
 
 
     Activity activity;
-    boolean isOn=false;
+    boolean isOn = false;
     Button loginB;
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        activity=this;
-        loginB= (Button) findViewById(R.id.loginB);
-        if(init()){
-            Log.d("firebase","Connection established");
-        }
-        else{
-            db=null;
-            auth=null;
-            AlertDialog.Builder builder=new AlertDialog.Builder(this);
+        context=this;
+        activity = this;
+        loginB = (Button) findViewById(R.id.loginB);
+        if (init()) {
+            Log.d("firebase", "Connection established");
+        } else {
+            db = null;
+            auth = null;
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setMessage("Could not connect to server").setTitle("Connection Error").setCancelable(false)
-            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    LoginActivity.super.finish();
-                }
-            });
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            LoginActivity.super.finish();
+                        }
+                    });
             builder.show();
         }
 
 
         TextView registerTV = (TextView) findViewById(R.id.registerTV);
-
 
 
         final Intent registerI = new Intent(this, RegisterActivity.class);
@@ -72,46 +74,59 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        final EditText username=(EditText) findViewById(R.id.loginETUsername);
-        final EditText password=(EditText ) findViewById(R.id.loginETPassword);
+        final EditText username = (EditText) findViewById(R.id.loginETUsername);
+        final EditText password = (EditText) findViewById(R.id.loginETPassword);
 
         loginB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //ToDo Test if string is empty
-                if((username.getText().toString()=="")||(password.getText()==null)) return;
-
-                login(username.getText().toString(),password.getText().toString());
+                InputMethodManager inputManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                String uname = username.getText().toString();
+                String pwd = password.getText().toString();
+                if ((uname.matches("")) && (pwd.matches(""))) {
+                    Toast.makeText(activity, "Please enter credentials ", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else if (uname.matches((""))) {
+                    Toast.makeText(activity, "Please enter a username", Toast.LENGTH_SHORT).show();
+                    return;
+                } else if (pwd.matches("")) {
+                    Toast.makeText(activity, "Please enter a password", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                login(username.getText().toString(), password.getText().toString());
                 loginB.setEnabled(false);
             }
         });
 
 
-
     }
 
 
-    private FirebaseAuth auth=null;
-    private FirebaseDatabase db=null;
+    private FirebaseAuth auth = null;
+    private FirebaseDatabase db = null;
 
-    private boolean init(){
+    private boolean init() {
 
-            auth=FirebaseAuth.getInstance();
-            db=FirebaseDatabase.getInstance();
+        auth = FirebaseAuth.getInstance();
+        db = FirebaseDatabase.getInstance();
 
 
         return true;
     }
-    private void login(String email,String password){
-        Log.d("firebase","firebase");
+
+    private void login(String email, String password) {
+        Log.d("firebase", "firebase");
         auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         Log.d("firebase2", "signInWithEmail:onComplete:" + task.isSuccessful());
-                        if(task.isSuccessful()){
+                        if (task.isSuccessful()) {
 
-                            Intent main=new Intent(getBaseContext(),MainActivity.class);
+                            Intent main = new Intent(getBaseContext(), MainActivity.class);
                             startActivity(main);
                             finish();
                         }
@@ -121,7 +136,7 @@ public class LoginActivity extends AppCompatActivity {
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
                             Log.w("firebase", "signInWithEmail:failed", task.getException());
-                            Toast.makeText(activity, "Auth failed", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(activity, "Authentification failed", Toast.LENGTH_SHORT).show();
                             loginB.setEnabled(true);
                         }
 
@@ -129,7 +144,6 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 });
     }
-
 
 
 }
