@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +31,8 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class LoginActivity extends AppCompatActivity {
 
+
+    boolean test=true;
 
     Activity activity;
     boolean isOn=false;
@@ -86,7 +89,18 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        ImageView imgTest=(ImageView)findViewById(R.id.imageViewTest);
+        imgTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                login("t@t.com","123123");
+                Intent test=new Intent(getBaseContext(),TestActivity.class);
+                test.putExtra("USER", String.valueOf(auth.getCurrentUser().getUid()));
+                startActivity(test);
 
+
+            }
+        });
 
     }
 
