@@ -44,28 +44,26 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        activity=this;
-        loginB= (Button) findViewById(R.id.loginB);
-        if(init()){
-            Log.d("firebase","Connection established");
-        }
-        else{
-            db=null;
-            auth=null;
-            AlertDialog.Builder builder=new AlertDialog.Builder(this);
+        activity = this;
+        loginB = (Button) findViewById(R.id.loginB);
+        if (init()) {
+            Log.d("firebase", "Connection established");
+        } else {
+            db = null;
+            auth = null;
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setMessage("Could not connect to server").setTitle("Connection Error").setCancelable(false)
-            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    LoginActivity.super.finish();
-                }
-            });
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            LoginActivity.super.finish();
+                        }
+                    });
             builder.show();
         }
 
 
         TextView registerTV = (TextView) findViewById(R.id.registerTV);
-
 
 
         final Intent registerI = new Intent(this, RegisterActivity.class);
@@ -77,32 +75,49 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        final EditText username=(EditText) findViewById(R.id.loginETUsername);
-        final EditText password=(EditText ) findViewById(R.id.loginETPassword);
+        final EditText username = (EditText) findViewById(R.id.loginETUsername);
+        final EditText password = (EditText) findViewById(R.id.loginETPassword);
 
         loginB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //ToDo Test if string is empty
-                if((username.getText().toString()=="")||(password.getText()==null)) return;
+                String uname = username.getText().toString();
+                String pwd = password.getText().toString();
+                InputMethodManager inputManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                if ((uname.matches("")) && (pwd.matches(""))){
+                    Toast.makeText(activity, "Please enter credentials", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else if ((uname.matches(""))){
+                    Toast.makeText(activity, "Please enter a username", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else if((pwd.matches(""))){
+                    Toast.makeText(activity, "Please enter a password", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
-                login(username.getText().toString(),password.getText().toString());
+                login(username.getText().toString(), password.getText().toString());
                 loginB.setEnabled(false);
             }
         });
+
 
         ImageView imgTest=(ImageView)findViewById(R.id.imageViewTest);
         imgTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                login("t@t.com","123123");
-                Intent test=new Intent(getBaseContext(),TestActivity.class);
+                login("t@t.com", "123123");
+                Intent test = new Intent(getBaseContext(), TestActivity.class);
                 test.putExtra("USER", String.valueOf(auth.getCurrentUser().getUid()));
                 startActivity(test);
 
 
+            }
+        });
     }
-
 
     private FirebaseAuth auth=null;
     private FirebaseDatabase db=null;
@@ -134,7 +149,7 @@ public class LoginActivity extends AppCompatActivity {
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
                             Log.w("firebase", "signInWithEmail:failed", task.getException());
-                            Toast.makeText(activity, "Auth failed", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(activity, "Authentication failed", Toast.LENGTH_SHORT).show();
                             loginB.setEnabled(true);
                         }
 

@@ -36,6 +36,7 @@ public class TestActivity extends AppCompatActivity {
                 Log.d("username",user);
                 DatabaseReference root=db.getReference("Users");
                 DatabaseReference userRoot=root.child(user);
+                DatabaseReference producer=userRoot.child("producer");producer.setValue("");
 
 
             }
