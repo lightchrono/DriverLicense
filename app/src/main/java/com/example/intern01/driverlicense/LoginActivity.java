@@ -82,7 +82,7 @@ public class LoginActivity extends AppCompatActivity {
         loginB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //ToDo Test if string is empty
+                //Test if string is empty
                 String uname = username.getText().toString();
                 String pwd = password.getText().toString();
                 if ((uname.matches("")) && (pwd.matches(""))) {
@@ -153,7 +153,7 @@ public class LoginActivity extends AppCompatActivity {
                                     .edit()
                                     .putString("lc_email", email)
                                     .putString("lc_pass", password)
-                                    .apply();
+                                    .commit();
                             Intent main = new Intent(getBaseContext(), MainActivity.class);
                             startActivity(main);
                             finish();
