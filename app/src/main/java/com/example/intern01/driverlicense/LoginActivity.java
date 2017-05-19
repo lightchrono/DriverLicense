@@ -35,7 +35,6 @@ public class LoginActivity extends AppCompatActivity {
 
 
     boolean test = true;
-
     Activity activity;
     boolean isOn = false;
     Button loginB;
@@ -86,15 +85,19 @@ public class LoginActivity extends AppCompatActivity {
                 //ToDo Test if string is empty
                 String uname = username.getText().toString();
                 String pwd = password.getText().toString();
-//                InputMethodManager inputManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-  //              inputManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                 if ((uname.matches("")) && (pwd.matches(""))) {
+                    InputMethodManager inputManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+                    inputManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                     Toast.makeText(activity, "Please enter credentials", Toast.LENGTH_SHORT).show();
                     return;
                 } else if ((uname.matches(""))) {
+                    InputMethodManager inputManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+                    inputManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                     Toast.makeText(activity, "Please enter a username", Toast.LENGTH_SHORT).show();
                     return;
                 } else if ((pwd.matches(""))) {
+                    InputMethodManager inputManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+                    inputManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                     Toast.makeText(activity, "Please enter a password", Toast.LENGTH_SHORT).show();
                     return;
                 }
