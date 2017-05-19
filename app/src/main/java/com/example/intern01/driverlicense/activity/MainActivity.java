@@ -238,6 +238,11 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.nav_logout:
                         navItemIndex = 3;
+                        getSharedPreferences("loginC", MODE_PRIVATE)
+                                .edit()
+                                .putString("lc_email", null)
+                                .putString("lc_pass", null)
+                                .commit();
                         Intent i = new Intent(context, LoginActivity.class);
                         context.startActivity(i);
                         finish();
