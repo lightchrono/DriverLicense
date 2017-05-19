@@ -85,8 +85,8 @@ public class LoginActivity extends AppCompatActivity {
                 //ToDo Test if string is empty
                 String uname = username.getText().toString();
                 String pwd = password.getText().toString();
-                InputMethodManager inputManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-                inputManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+//                InputMethodManager inputManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+  //              inputManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                 if ((uname.matches("")) && (pwd.matches(""))) {
                     Toast.makeText(activity, "Please enter credentials", Toast.LENGTH_SHORT).show();
                     return;
