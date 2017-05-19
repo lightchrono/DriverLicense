@@ -14,6 +14,7 @@ public class TestActivity extends AppCompatActivity {
 
     FirebaseAuth auth;
     FirebaseDatabase db;
+
     String user;
 
     @Override
