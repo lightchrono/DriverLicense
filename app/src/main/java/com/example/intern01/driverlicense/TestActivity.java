@@ -36,7 +36,6 @@ public class TestActivity extends AppCompatActivity {
                 DatabaseReference root=db.getReference("Users");
                 DatabaseReference userRoot=root.child(user);
 
-                DatabaseReference
 
             }
         });
