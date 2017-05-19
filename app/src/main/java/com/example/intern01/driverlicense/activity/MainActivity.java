@@ -242,7 +242,7 @@ public class MainActivity extends AppCompatActivity {
                                 .edit()
                                 .putString("lc_email", null)
                                 .putString("lc_pass", null)
-                                .commit();
+                                .apply();
                         Intent i = new Intent(context, LoginActivity.class);
                         context.startActivity(i);
                         finish();
