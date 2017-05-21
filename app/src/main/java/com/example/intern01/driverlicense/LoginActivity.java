@@ -200,10 +200,6 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
-    private void loginFacebook() {
-
-    }
-
     //Google Log In
     private void signIn() {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
