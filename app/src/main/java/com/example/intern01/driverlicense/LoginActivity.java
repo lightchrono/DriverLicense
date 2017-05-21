@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 
@@ -47,14 +48,34 @@ public class LoginActivity extends AppCompatActivity {
     Button googleLoginB;
     private static final int RC_SIGN_IN = 1;
     private GoogleApiClient mGoogleApiClient;
+    //Facebook
+    Button facebookloginB;
+    CallbackManager callbackManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_login);
         context = this;
         activity = this;
         loginB = (Button) findViewById(R.id.loginB);
+
+        if (init()) {
+            Log.d("firebase", "Connection established");
+        } else {
+            db = null;
+            auth = null;
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("Could not connect to server").setTitle("Connection Error").setCancelable(false)
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            LoginActivity.super.finish();
+                        }
+                    });
+            builder.show();
+        }
 
         // Configure Google Sign In
         googleLoginB = (Button) findViewById(R.id.loginGoogle);
@@ -78,22 +99,9 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-
-        if (init()) {
-            Log.d("firebase", "Connection established");
-        } else {
-            db = null;
-            auth = null;
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage("Could not connect to server").setTitle("Connection Error").setCancelable(false)
-                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            LoginActivity.super.finish();
-                        }
-                    });
-            builder.show();
-        }
+        //Configure Facebook Sign In
+        facebookloginB = (Button) findViewById(R.id.loginFacebook);
+        callbackManager = CallbackManager.Factory.create();
 
         TextView registerTV = (TextView) findViewById(R.id.registerTV);
 
