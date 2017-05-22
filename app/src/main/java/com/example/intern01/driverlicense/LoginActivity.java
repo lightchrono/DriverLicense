@@ -22,6 +22,8 @@ import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 
 import com.example.intern01.driverlicense.activity.MainActivity;
+import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.common.SignInButton;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.GoogleAuthProvider;
@@ -45,11 +47,11 @@ public class LoginActivity extends AppCompatActivity {
     boolean isOn = false;
     Button loginB;
     //Google Log In
-    Button googleLoginB;
+    SignInButton googleLoginB;
     private static final int RC_SIGN_IN = 1;
     private GoogleApiClient mGoogleApiClient;
     //Facebook
-    Button facebookloginB;
+    LoginButton facebookloginB;
     CallbackManager callbackManager;
 
     @Override
@@ -78,7 +80,9 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         // Configure Google Sign In
-        googleLoginB = (Button) findViewById(R.id.loginGoogle);
+        googleLoginB = (SignInButton) findViewById(R.id.loginGoogle);
+        TextView textView = (TextView) googleLoginB.getChildAt(0);
+        textView.setText("Continue with Google");
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
@@ -100,7 +104,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         //Configure Facebook Sign In
-        facebookloginB = (Button) findViewById(R.id.loginFacebook);
+        facebookloginB = (LoginButton) findViewById(R.id.loginFacebook);
         callbackManager = CallbackManager.Factory.create();
 
         TextView registerTV = (TextView) findViewById(R.id.registerTV);
