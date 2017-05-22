@@ -30,17 +30,16 @@ import com.google.firebase.database.FirebaseDatabase;
 public class GoogleLogin extends AppCompatActivity {
 
     Activity activity;
-    Button loginB;
     //Google Log In
     private static final int RC_SIGN_IN = 1;
     private GoogleApiClient mGoogleApiClient;
+    private FirebaseAuth auth = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_google_login);
         init();
-        loginB = (Button) findViewById(R.id.loginB);
         activity=this;
 
         // Configure Google Sign In
@@ -60,13 +59,8 @@ public class GoogleLogin extends AppCompatActivity {
         signIn();
     }
 
-    private FirebaseAuth auth = null;
-    private FirebaseDatabase db = null;
-
     private boolean init() {
         auth = FirebaseAuth.getInstance();
-        db = FirebaseDatabase.getInstance();
-
         return true;
     }
 
@@ -106,6 +100,7 @@ public class GoogleLogin extends AppCompatActivity {
                             Log.d("TAG", "signInWithCredential:success");
                             Intent main = new Intent(getBaseContext(), MainActivity.class);
                             startActivity(main);
+                            Toast.makeText(activity, "You have been authenticated.", Toast.LENGTH_SHORT).show();
                             finish();
                         } else {
                             Intent loginIntent = new Intent(getBaseContext(),LoginActivity.class);

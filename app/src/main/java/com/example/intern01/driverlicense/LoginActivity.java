@@ -51,7 +51,6 @@ public class LoginActivity extends AppCompatActivity {
     SignInButton googleLoginB;
     //Facebook
     LoginButton facebookloginB;
-    CallbackManager callbackManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,10 +73,12 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        // Configure Facebook Sign In
+        facebookloginB = (LoginButton) findViewById(R.id.loginFacebook);
+
         if (init()) {
             Log.d("firebase", "Connection established");
         } else {
-            db = null;
             auth = null;
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setMessage("Could not connect to server").setTitle("Connection Error").setCancelable(false)
@@ -89,10 +90,6 @@ public class LoginActivity extends AppCompatActivity {
                     });
             builder.show();
         }
-
-        //Configure Facebook Sign In
-        facebookloginB = (LoginButton) findViewById(R.id.loginFacebook);
-        callbackManager = CallbackManager.Factory.create();
 
         TextView registerTV = (TextView) findViewById(R.id.registerTV);
 
@@ -154,12 +151,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private FirebaseAuth auth = null;
-    private FirebaseDatabase db = null;
 
     private boolean init() {
         auth = FirebaseAuth.getInstance();
-        db = FirebaseDatabase.getInstance();
-
         return true;
     }
 

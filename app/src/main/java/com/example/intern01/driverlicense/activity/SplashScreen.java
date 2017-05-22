@@ -33,7 +33,7 @@ public class SplashScreen extends AppCompatActivity {
                 }
 
 
-
+        // ToDo - checkups on internet, gps, camera (for car or profile)
 
         final ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBarSplash);
         progressBar.setMax(100);
