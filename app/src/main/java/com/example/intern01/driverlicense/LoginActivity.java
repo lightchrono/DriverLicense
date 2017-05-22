@@ -22,6 +22,9 @@ import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 
 import com.example.intern01.driverlicense.activity.MainActivity;
+import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.common.SignInButton;
+import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.GoogleAuthProvider;
@@ -44,22 +47,32 @@ public class LoginActivity extends AppCompatActivity {
     Activity activity;
     boolean isOn = false;
     Button loginB;
-    //Google Log In
-    Button googleLoginB;
-    private static final int RC_SIGN_IN = 1;
-    private GoogleApiClient mGoogleApiClient;
+    //Google
+    SignInButton googleLoginB;
     //Facebook
-    Button facebookloginB;
+    LoginButton facebookloginB;
     CallbackManager callbackManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_login);
         context = this;
         activity = this;
         loginB = (Button) findViewById(R.id.loginB);
+
+        // Configure Google Sign In
+        googleLoginB = (SignInButton) findViewById(R.id.loginGoogle);
+        TextView textView = (TextView) googleLoginB.getChildAt(0);
+        textView.setText("Continue with Google");
+
+        googleLoginB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent googleIntent = new Intent(context, GoogleLogin.class);
+                startActivity(googleIntent);
+            }
+        });
 
         if (init()) {
             Log.d("firebase", "Connection established");
@@ -77,30 +90,8 @@ public class LoginActivity extends AppCompatActivity {
             builder.show();
         }
 
-        // Configure Google Sign In
-        googleLoginB = (Button) findViewById(R.id.loginGoogle);
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build();
-        mGoogleApiClient = new GoogleApiClient.Builder(getApplicationContext())
-                .enableAutoManage(this, new GoogleApiClient.OnConnectionFailedListener() {
-                    @Override
-                    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-                        Toast.makeText(activity, "Error while trying to connect with Google.", Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .build();
-        googleLoginB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                signIn();
-            }
-        });
-
         //Configure Facebook Sign In
-        facebookloginB = (Button) findViewById(R.id.loginFacebook);
+        facebookloginB = (LoginButton) findViewById(R.id.loginFacebook);
         callbackManager = CallbackManager.Factory.create();
 
         TextView registerTV = (TextView) findViewById(R.id.registerTV);
@@ -166,10 +157,8 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseDatabase db = null;
 
     private boolean init() {
-
         auth = FirebaseAuth.getInstance();
         db = FirebaseDatabase.getInstance();
-
 
         return true;
     }
@@ -208,47 +197,7 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
-    //Google Log In
-    private void signIn() {
-        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
-        startActivityForResult(signInIntent, RC_SIGN_IN);
-    }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
-        if (requestCode == RC_SIGN_IN) {
-            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
-            if (result.isSuccess()) {
-                // Google Sign In was successful, authenticate with Firebase
-                GoogleSignInAccount account = result.getSignInAccount();
-                firebaseAuthWithGoogle(account);
-            } else {
-                // Google Sign In failed, update UI appropriately
-            }
-        }
-    }
 
-    private void firebaseAuthWithGoogle(GoogleSignInAccount account) {
-        Log.d("firebase", "log with google");
-        AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
-        auth.signInWithCredential(credential)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d("TAG", "signInWithCredential:success");
-                            Intent main = new Intent(getBaseContext(), MainActivity.class);
-                            startActivity(main);
-                            finish();
-                        } else {
-                            Log.w("TAG", "signInWithCredential:failure", task.getException());
-                            Toast.makeText(activity, "Authentication failed.", Toast.LENGTH_SHORT).show();
-                            loginB.setEnabled(true);
-                        }
-                    }
-                });
-    }
+
 }

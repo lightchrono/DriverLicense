@@ -114,27 +114,26 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingTop="30dp">
+            android:orientation="vertical"
+            android:paddingTop="20dp">
 
-            <Button
+            <com.google.android.gms.common.SignInButton
+
                 android:id="@+id/loginGoogle"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_weight="1"
-                android:background="@drawable/ic_google"/>
+                android:layout_height="35dp"
+                android:layout_width="255dp"/>
 
             <Space
                 android:layout_width="10dp"
                 android:layout_height="10dp"
                 android:layout_weight="1" />
 
-            <Button
+            <com.facebook.login.widget.LoginButton
+                android:gravity="center"
                 android:id="@+id/loginFacebook"
-                android:background="@drawable/ic_facebook"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_weight="1" />
+                android:layout_width="match_parent"
+                android:layout_height="50dp" />
+
         </LinearLayout>
 
     </LinearLayout>
