@@ -26,5 +26,6 @@
     <string name="action_mark_all_read">Mark All as Read</string>
 
     <string name="facebook_app_id">1171539769635707</string>
+    <string name="title_activity_facebook_login">FacebookLogin</string>
 
 </resources>
