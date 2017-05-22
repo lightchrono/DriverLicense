@@ -17,10 +17,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.facebook.CallbackManager;
-import com.facebook.FacebookSdk;
-import com.facebook.appevents.AppEventsLogger;
-
 import com.example.intern01.driverlicense.activity.MainActivity;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.common.SignInButton;
@@ -75,6 +71,14 @@ public class LoginActivity extends AppCompatActivity {
 
         // Configure Facebook Sign In
         facebookloginB = (LoginButton) findViewById(R.id.loginFacebook);
+
+        facebookloginB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent facebookIntent = new Intent(context, FacebookLogin.class);
+                startActivity(facebookIntent);
+            }
+        });
 
         if (init()) {
             Log.d("firebase", "Connection established");
@@ -190,8 +194,4 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 });
     }
-
-
-
-
 }

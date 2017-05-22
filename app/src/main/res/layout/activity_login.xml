@@ -129,10 +129,10 @@
                 android:layout_weight="1" />
 
             <com.facebook.login.widget.LoginButton
-                android:gravity="center"
                 android:id="@+id/loginFacebook"
                 android:layout_width="match_parent"
-                android:layout_height="50dp" />
+                android:layout_height="50dp"
+                android:gravity="center" />
 
         </LinearLayout>
 

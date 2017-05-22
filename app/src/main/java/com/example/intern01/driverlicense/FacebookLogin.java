@@ -70,6 +70,7 @@ public class FacebookLogin extends AppCompatActivity {
         return true;
     }
 
+
     private void handleFacebookAccessToken(AccessToken token) {
         Log.d("FB", "handleFacebookAccessToken:" + token);
 
