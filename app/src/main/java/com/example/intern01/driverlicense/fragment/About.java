@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -74,7 +75,9 @@ public class About extends Fragment {
             mListener.onFragmentInteraction(uri);
         }
     }
-
+    public void buttonAbout(View view){
+        Log.d("FAB","FABABOUT");
+    }
    // @Override
     //public void onAttach(Context context) {
      //   super.onAttach(context);

@@ -6,10 +6,11 @@
     tools:context="com.example.intern01.driverlicense.fragment.About">
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/floatingActionButton"
+        android:id="@+id/addCarFABID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
+        android:onClick="buttonAbout"
         app:fabSize="mini"
         app:srcCompat="@drawable/bg_circle" />
 </FrameLayout>
