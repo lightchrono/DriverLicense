@@ -17,7 +17,7 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="20dp" />
+            android:layout_height="15dp" />
 
         <TextView
             android:id="@+id/loginAPPName"
@@ -36,13 +36,13 @@
             android:adjustViewBounds="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:maxHeight="100dp"
-            android:maxWidth="200dp"
+            android:maxHeight="90dp"
+            android:maxWidth="190dp"
             app:srcCompat="@mipmap/ic_loadscreen" />
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="10dp" />
+            android:layout_height="5dp" />
 
         <TextView
             android:id="@+id/loginTVUsername"
@@ -53,7 +53,7 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="10dp" />
+            android:layout_height="5dp" />
 
         <EditText
             android:id="@+id/loginETUsername"
@@ -65,7 +65,7 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="25dp" />
+            android:layout_height="15dp" />
 
         <TextView
             android:id="@+id/loginTVPassword"
@@ -76,7 +76,7 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="10dp" />
+            android:layout_height="5dp" />
 
         <EditText
             android:id="@+id/loginETPassword"
@@ -88,7 +88,7 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="35dp" />
+            android:layout_height="25dp" />
 
         <Button
             android:id="@+id/loginB"
@@ -96,19 +96,25 @@
             android:layout_height="wrap_content"
             android:text="LOGIN" />
 
+        <Button
+            android:id="@+id/registerB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="REGISTER"/>
+
         <Space
             android:layout_width="match_parent"
             android:layout_height="5dp" />
 
         <TextView
-            android:id="@+id/registerTV"
+            android:id="@+id/forgotTV"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="true"
             android:gravity="center_horizontal"
-            android:text="REGISTER"
+            android:text="FORGOT PASSWORD"
             android:textColor="@android:color/holo_blue_dark" />
 
         <LinearLayout

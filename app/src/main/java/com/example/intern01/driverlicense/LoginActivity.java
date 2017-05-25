@@ -31,6 +31,7 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -105,11 +106,11 @@ public class LoginActivity extends AppCompatActivity {
             builder.show();
         }
 
-        TextView registerTV = (TextView) findViewById(R.id.registerTV);
+        Button registerB = (Button) findViewById(R.id.registerB);
 
         final Intent registerI = new Intent(this, RegisterActivity.class);
 
-        registerTV.setOnClickListener(new View.OnClickListener() {
+        registerB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(registerI);
@@ -162,6 +163,9 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(test);
             }
         });
+
+        onStart();
+
     }
 
     private FirebaseAuth auth = null;
@@ -235,6 +239,19 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        FirebaseUser currentUser = auth.getCurrentUser();
+        if(currentUser==null){
+        }
+        else {
+            Intent main = new Intent(getBaseContext(), MainActivity.class);
+            startActivity(main);
+            finish();
+        }
     }
 
 }
