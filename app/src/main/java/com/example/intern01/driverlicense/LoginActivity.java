@@ -33,6 +33,8 @@ import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import org.w3c.dom.Text;
+
 public class LoginActivity extends AppCompatActivity {
 
     Context context;
@@ -40,6 +42,7 @@ public class LoginActivity extends AppCompatActivity {
     Activity activity;
     boolean isOn = false;
     Button loginB;
+
     //Google
     SignInButton googleLoginB;
     //Facebook
@@ -145,6 +148,15 @@ public class LoginActivity extends AppCompatActivity {
 
                 login(username.getText().toString(), password.getText().toString());
                 loginB.setEnabled(false);
+            }
+        });
+
+        TextView forgotTV = (TextView)findViewById(R.id.forgotTV);
+
+        forgotTV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
 
