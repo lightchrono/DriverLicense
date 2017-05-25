@@ -22,34 +22,37 @@ public class carClass {
         try{
             DatabaseReference root = db.getReference("Users");
             DatabaseReference userRoot = root.child(userUID);
+            
             DatabaseReference car = userRoot.child(carNickname);
-            DatabaseReference producerR = car.child("producer");
+            DatabaseReference generalInfo=car.child("generalInfo");
+            
+            DatabaseReference producerR = generalInfo.child("producer");
             producerR.setValue(producer);
-            DatabaseReference modelR = car.child("model");
+            DatabaseReference modelR = generalInfo.child("model");
             modelR.setValue(model);
-            DatabaseReference engineR = car.child("engine");
+            DatabaseReference engineR = generalInfo.child("engine");
             engineR.setValue(engine);
-            DatabaseReference yearR = car.child("year");
+            DatabaseReference yearR = generalInfo.child("year");
             yearR.setValue(year);
-            DatabaseReference enginedisplacement = car.child("enginedisplacement");
+            DatabaseReference enginedisplacement = generalInfo.child("enginedisplacement");
             enginedisplacement.setValue(engineDis);
-            DatabaseReference horsepower = car.child("horsepower");
+            DatabaseReference horsepower = generalInfo.child("horsepower");
             horsepower.setValue(horsePower);
-            DatabaseReference fueltype = car.child("fueltype");
+            DatabaseReference fueltype = generalInfo.child("fueltype");
             fueltype.setValue(fuelType);
-            DatabaseReference drivewheel = car.child("drivewheel");
+            DatabaseReference drivewheel = generalInfo.child("drivewheel");
             drivewheel.setValue(driverWheel);
-            DatabaseReference bodyseries = car.child("bodyseries");
+            DatabaseReference bodyseries = generalInfo.child("bodyseries");
             bodyseries.setValue(bodySeries);
-            DatabaseReference coupetype = car.child("coupetype");
+            DatabaseReference coupetype = generalInfo.child("coupetype");
             coupetype.setValue(coupeType);
-            DatabaseReference numberdoors = car.child("numberdoors");
+            DatabaseReference numberdoors = generalInfo.child("numberdoors");
             numberdoors.setValue(numberDoors);
-            DatabaseReference numberseats = car.child("numberseats");
+            DatabaseReference numberseats = generalInfo.child("numberseats");
             numberseats.setValue(numberSeats);
-            DatabaseReference colorR = car.child("color");
+            DatabaseReference colorR = generalInfo.child("color");
             colorR.setValue(color);
-            DatabaseReference kmatbuy = car.child("kmatbuy");
+            DatabaseReference kmatbuy = generalInfo.child("kmatbuy");
             kmatbuy.setValue(kmAtBuy);
         }
         catch (Exception ex){
