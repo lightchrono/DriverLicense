@@ -71,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         context=this;
+        init();
 
         mHandler = new Handler();
 
@@ -215,6 +216,15 @@ public class MainActivity extends AppCompatActivity {
         navigationView.getMenu().getItem(navItemIndex).setChecked(true);
     }
 
+    //LOG OUT
+    private FirebaseAuth auth = null;
+
+    private boolean init() {
+        auth = FirebaseAuth.getInstance();
+        return true;
+    }
+
+
     private void setUpNavigationView() {
         //Setting Navigation View Item Selected Listener to handle the item click of the navigation menu
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -245,6 +255,7 @@ public class MainActivity extends AppCompatActivity {
                                 .putString("lc_email", null)
                                 .putString("lc_pass", null)
                                 .apply();
+                        auth.signOut();
                         LoginManager.getInstance().logOut();
                         Intent i = new Intent(context, LoginActivity.class);
                         context.startActivity(i);
