@@ -9,6 +9,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -60,7 +61,7 @@ public class LoginActivity extends AppCompatActivity {
 
         // Configure Google Sign In
         googleLoginB = (SignInButton) findViewById(R.id.loginGoogle);
-        TextView textView = (TextView) googleLoginB.getChildAt(0);
+        final TextView textView = (TextView) googleLoginB.getChildAt(0);
         textView.setText("Continue with Google");
 
         googleLoginB.setOnClickListener(new View.OnClickListener() {
@@ -154,18 +155,26 @@ public class LoginActivity extends AppCompatActivity {
 
         TextView forgotTV = (TextView)findViewById(R.id.forgotTV);
 
+        // ToDo fix the fucking edittexts!!!
+
         forgotTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                LayoutInflater inf = LayoutInflater.from(getBaseContext());
+                final View inflator = inf.inflate(R.layout.dialog_forgot_password, null);
                 AlertDialog.Builder builder=new AlertDialog.Builder(activity);
                 builder.setView(R.layout.dialog_forgot_password);
+                final EditText firstMail=(EditText) inflator.findViewById(R.id.recoverbyEmail);
+                final EditText secondMail=(EditText) inflator.findViewById(R.id.recoverbyEmailConfirm);
                 builder.setTitle("Password Recovery")
                         .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Log.d("forgot","Confirm");
+                        String fm = firstMail.getText().toString();
+                        Log.d("forgot", fm);
                     }
                 });
+
                 builder.show();
             }
         });
