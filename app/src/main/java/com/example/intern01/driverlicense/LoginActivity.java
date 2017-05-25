@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import com.example.intern01.driverlicense.activity.MainActivity;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -156,7 +157,16 @@ public class LoginActivity extends AppCompatActivity {
         forgotTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                AlertDialog.Builder builder=new AlertDialog.Builder(activity);
+                builder.setView(R.layout.dialog_forgot_password);
+                builder.setTitle("Password Recovery")
+                        .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Log.d("forgot","Confirm");
+                    }
+                });
+                builder.show();
             }
         });
 
@@ -264,5 +274,4 @@ public class LoginActivity extends AppCompatActivity {
             finish();
         }
     }
-
 }
