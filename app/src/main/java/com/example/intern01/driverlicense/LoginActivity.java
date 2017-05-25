@@ -152,9 +152,8 @@ public class LoginActivity extends AppCompatActivity {
         imgTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                login("t@t.com", "123123");
                 Intent test = new Intent(getBaseContext(), TestActivity.class);
-                test.putExtra("USER", String.valueOf(auth.getCurrentUser().getUid()));
+
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {

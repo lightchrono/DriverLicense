@@ -50,7 +50,7 @@ public class TestActivity extends AppCompatActivity {
                 //car.createCar();
                 Intent serviceI=new Intent(TestActivity.this,NotificationService.class);
                 startService(serviceI);
-                getSystemService(NotificationService.class);
+
 
 
 
