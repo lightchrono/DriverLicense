@@ -26,28 +26,15 @@
         <activity
             android:name=".activity.MainActivity"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".LoginActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".TestActivity"
-            android:screenOrientation="portrait" />
+        <activity android:name=".LoginActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".TestActivity"
+            android:screenOrientation="portrait"/>
 
-        <meta-data
-            android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id" />
+        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
 
-        <activity
-            android:name=".FacebookLogin"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".GoogleLogin"
-            android:screenOrientation="portrait" />
-
-        <service
-            android:name=".Service.NotificationService"
-            android:enabled="true"
-            android:exported="true"></service>
+        <activity android:name=".GoogleLogin"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

@@ -27,6 +27,7 @@ import com.example.intern01.driverlicense.fragment.About;
 import com.example.intern01.driverlicense.fragment.MyCars;
 import com.example.intern01.driverlicense.fragment.Profile;
 import com.example.intern01.driverlicense.other.CircleTransform;
+import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
@@ -244,6 +245,7 @@ public class MainActivity extends AppCompatActivity {
                                 .putString("lc_email", null)
                                 .putString("lc_pass", null)
                                 .apply();
+                        LoginManager.getInstance().logOut();
                         Intent i = new Intent(context, LoginActivity.class);
                         context.startActivity(i);
                         finish();
